@@ -5,26 +5,8 @@ defaults: &defaults
   stack: windows2016
 
 applications:
-#- name: C2C-WcfService-WartmanGr
-#  path: \WcfService\WcfService1
-#  <<: *defaults
-#  buildpacks:
-#  - https://github.com/macsux/route-service-auth-buildpack/releases/download/1.0/RouteServiceAuthenticationBuildpack-win-x64-1.0.610429544.zip
-#  - hwc_buildpack
-#  routes:
-#  - route: appco-consumer-ws.apps.uat.cf.az.cihs.gov.on.ca
 
-#- name: C2C-WcfClient-WartmanGr
-#  <<: *defaults
-#  path: \WcfClient\WcfClient
-#  buildpacks:
-#  - https://github.com/macsux/web-config-transform-buildpack/releases/download/1.1.3/web_config_transform_buildpack-win-x64-1.1.3.zip
-#  - hwc_buildpack
-#  env:
-#    svcendpoint: http://c2c-wcfservice-wartmangr.apps.internal/Service.svc
-
-
-- name: C2C-WcfClient-External-WartmanGr
+- name: C2C-WcfClient-External
   <<: *defaults
   path: \WcfClient\WcfClient
   buildpacks:
@@ -32,19 +14,19 @@ applications:
   - https://github.com/macsux/route-service-auth-buildpack/releases/download/v1.1.0/RouteServiceAuthenticationBuildpack-win-x64-1.1.0.zip
   - hwc_buildpack
   env:
-    svcendpoint: http://c2c-wcfservice-external-wartmangr.apps.uat.cf.az.cihs.gov.on.ca/Service.svc
-    "appSettings:BasicHttpBinding_IService_SPN": "host/c2c-wcfservice-external-wartmangr.apps.uat.cf.az.cihs.gov.on.ca"
-    "appSettings:Client_UPN": "WartmanGr@MTO.AD.GOV.ON.CA"
+    svcendpoint: http://c2c-wcfservice-external.apps.uat.cf.az.cihs.gov.on.ca/Service.svc
+    "appSettings:BasicHttpBinding_IService_SPN": "host/c2c-wcfservice-external.apps.uat.cf.az"
+    "appSettings:Client_UPN": "foo@EXAMPLE.COM"
     KRB5_CONFIG: C:\Users\vcap\app\krb5.ini
   routes:
-  - route: c2c-wcfclient-external-wartmangr.apps.uat.cf.az.cihs.gov.on.ca
+  - route: c2c-wcfclient-external.apps.uat.cf.az
 
 
-- name: C2C-WcfService-External-WartmanGr
+- name: C2C-WcfService-External
   path: \WcfService\WcfService1
   <<: *defaults
   buildpacks:
   - https://github.com/macsux/route-service-auth-buildpack/releases/download/v1.2.0/RouteServiceAuthenticationBuildpack-win-x64-1.2.0.zip
   - hwc_buildpack
   routes:
-  - route: c2c-wcfservice-external-wartmangr.apps.uat.cf.az.cihs.gov.on.ca
+  - route: c2c-wcfservice-external.apps.uat.cf.az
